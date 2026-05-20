@@ -22,18 +22,22 @@ body {
 }
 
 input {
-    display: none; /* Hides checkboxes */
+    display: none;
 }
 
-/* FLIP BOOK - RESPONSIVE */
 #flip_book {
-    width: 25vw;
-    height: 60vh;
-    position: relative;
+    width: 320px;
+    height: 427px;
+    position: absolute;
+    top: 5vh;
+    left: 10vw;
     transition-duration: 1s;
-    perspective: 2000px;
-    animation: bookEntrance 3s cubic-bezier(0.25, 1, 0.5, 1);
+    perspective: 10000px;
+    animation:
+        bookFly 0.8s cubic-bezier(0.3, 0.75, 0, 1.15) forwards,
+        bookSettle 0.3s ease-out 0.82s forwards;
     border-radius: 20px;
+    transform: rotateZ(-6deg);
     box-shadow:
         rgba(0, 0, 0, 0.25) 0px 54px 55px,
         rgba(0, 0, 0, 0.12) 0px -12px 30px,
@@ -42,18 +46,22 @@ input {
         rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
-@keyframes bookEntrance {
+@keyframes bookFly {
     0% {
-        opacity: 1;
-        transform: translateY(80vh) rotateZ(-180deg);
-    }
-    50% {
-        opacity: 1;
-        transform: translateY(-15vh) rotateZ(-8deg);
+        transform: translateX(30vw) translateY(100vh) rotateZ(-70deg)
+            scale(0.97);
     }
     100% {
-        opacity: 1;
-        transform: translateY(0) rotate(0deg);
+        transform: translateX(2%) translateY(3%) rotateZ(3deg) scale(1.02);
+    }
+}
+
+@keyframes bookSettle {
+    0% {
+        transform: translateX(2%) translateY(3%) rotateZ(3deg) scale(1.015);
+    }
+    100% {
+        transform: rotateZ(10deg) scale(1);
     }
 }
 
