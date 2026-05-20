@@ -1,0 +1,238 @@
+/* RESET CSS */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* GENERAL */
+body {
+    width: 100%;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: monospace, sans-serif;
+    font-size: 0.5rem;
+    background-color: rgb(245, 245, 245);
+    color: rgb(2, 4, 8);
+}
+
+input {
+    display: none; /* Hides checkboxes */
+}
+
+/* FLIP BOOK - RESPONSIVE */
+#flip_book {
+    width: 25vw;
+    height: 60vh;
+    position: relative;
+    transition-duration: 1s;
+    perspective: 2000px;
+    animation: bookEntrance 3s cubic-bezier(0.25, 1, 0.5, 1);
+    border-radius: 20px;
+    box-shadow:
+        rgba(0, 0, 0, 0.25) 0px 54px 55px,
+        rgba(0, 0, 0, 0.12) 0px -12px 30px,
+        rgba(0, 0, 0, 0.12) 0px 4px 6px,
+        rgba(0, 0, 0, 0.17) 0px 12px 13px,
+        rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+@keyframes bookEntrance {
+    0% {
+        opacity: 1;
+        transform: translateY(80vh) rotateZ(-180deg);
+    }
+    50% {
+        opacity: 1;
+        transform: translateY(-15vh) rotateZ(-8deg);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) rotate(0deg);
+    }
+}
+
+#polaroid_image {
+    width: 25vw;
+    height: 60vh;
+    position: relative;
+    transition-duration: 1s;
+    perspective: 2000px;
+    animation: polaroidEntrance 3s cubic-bezier(0.25, 1, 0.5, 1);
+    border-radius: 20px;
+    box-shadow:
+        rgba(0, 0, 0, 0.25) 0px 54px 55px,
+        rgba(0, 0, 0, 0.12) 0px -12px 30px,
+        rgba(0, 0, 0, 0.12) 0px 4px 6px,
+        rgba(0, 0, 0, 0.17) 0px 12px 13px,
+        rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+@keyframes polaroidEntrance {
+    0% {
+        opacity: 1;
+        transform: translateY(80vh) rotateZ(-180deg);
+    }
+    50% {
+        opacity: 1;
+        transform: translateY(-15vh) rotateZ(-8deg);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) rotate(0deg);
+    }
+}
+
+.front_cover,
+.back_cover {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    background-image: url("/assets/images/BookCover.webp");
+    object-fit: cover;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    box-shadow: 0 0 0px 0 rgba(25, 25, 25, 0.25);
+}
+
+.front_cover {
+    position: absolute;
+    cursor: pointer;
+    transform-origin: center left;
+    transition: transform 0.5s;
+    z-index: 99;
+}
+
+.front_cover label {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    cursor: pointer;
+}
+
+.page {
+    width: 96.6%;
+    height: 95.2%;
+    position: absolute;
+    top: 2.4%;
+    left: 0.34%;
+    border-radius: 0 1.5% 1.5% 0;
+    background-color: white;
+    transform-origin: left;
+    transform-style: preserve-3d;
+    transform: rotateY(0deg);
+    transition-duration: 0.5s;
+}
+
+.front_page,
+.back_page {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+}
+
+.front_page label,
+.back_page label {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    cursor: pointer;
+    z-index: 100;
+}
+
+.edge_shading {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 98;
+}
+
+.front_content {
+    width: 99.65%;
+    height: 99.5%;
+    position: absolute;
+    top: 0.25%;
+    border-radius: 0 1.5% 1.5% 0;
+    z-index: 97;
+}
+
+.back_content {
+    width: 99.65%;
+    height: 99.5%;
+    position: absolute;
+    top: 0.25%;
+    left: 0.35%;
+    border-radius: 1.5% 0 0 1.5%;
+    z-index: 97;
+}
+
+.back_cover {
+    position: relative;
+    z-index: -1;
+}
+
+#page1 {
+    z-index: 8;
+}
+#page2 {
+    z-index: 5;
+}
+#page3 {
+    z-index: 4;
+}
+#page4 {
+    z-index: 3;
+}
+#page5 {
+    z-index: 2;
+}
+
+#cover_checkbox:checked ~ #flip_book {
+    transform: translateX(50%);
+}
+
+#cover_checkbox:checked ~ #flip_book .front_cover {
+    transform: rotateY(-180deg);
+    transition:
+        transform 1.5s,
+        z-index 0.5s 0.5s;
+    z-index: 1;
+}
+
+#cover_checkbox:checked ~ #flip_book #cover {
+    width: 80%;
+    height: 80%;
+    position: absolute;
+}
+
+#page1_checkbox:checked ~ #flip_book #page1 {
+    transform: rotateY(-180deg);
+    z-index: 3;
+}
+#page2_checkbox:checked ~ #flip_book #page2 {
+    transform: rotateY(-180deg);
+    z-index: 4;
+}
+#page3_checkbox:checked ~ #flip_book #page3 {
+    transform: rotateY(-180deg);
+    z-index: 5;
+}
+#page4_checkbox:checked ~ #flip_book #page4 {
+    transform: rotateY(-180deg);
+    z-index: 6;
+}
+#page5_checkbox:checked ~ #flip_book #page5 {
+    transform: rotateY(-180deg);
+    z-index: 9;
+}
